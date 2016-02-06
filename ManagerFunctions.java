@@ -1,4 +1,6 @@
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Created by branden on 2/6/16 at 12:54.
@@ -55,8 +57,9 @@ public class ManagerFunctions {
         String firstName = scanner.nextLine();
         System.out.println("Enter Contact's last name:");
         String lastName = scanner.nextLine();
-        String fullName = firstName.concat("_");
-        fullName = fullName.concat(lastName);
+        //Integer fullName = lastName + ", " + firstName;
+        //String fullName = firstName.concat("_");
+        //fullName = fullName.concat(lastName);
         String nameArray[] = {firstName, lastName};
 
         //address
@@ -78,7 +81,8 @@ public class ManagerFunctions {
         boolean isPersonal = Utils.stringToBoolean(scanner.nextLine());
 
         //assign all these vars!
-        ContactManager.contactMap.put(fullName, new Contact(nameArray, streetAddress, state, city, phone, zip, isPersonal));
+        int numberOfContacts = ContactManager.contactMap.size();
+        ContactManager.contactMap.put(numberOfContacts, new Contact(nameArray, streetAddress, state, city, phone, zip, isPersonal));
 
        // System.out.println(ContactManager.contactMap.get(fullName).getCity()); Debugging! Remove me later!
 
@@ -86,6 +90,18 @@ public class ManagerFunctions {
     }
 
     public static void listContacts() {
+
+        System.out.println("Please enter the number of the contact you wish to view:");
+        int i = 1;
+        for (Map.Entry<Integer, Contact> entry : ContactManager.contactMap.entrySet()) {
+            Integer key = entry.getKey();
+            Contact value = entry.getValue();
+            System.out.println(key + ". " + value.getFullName()[0] + " " + value.getFullName()[1]);
+        }
+
+        int viewContact = Utils.stringToInt(scanner.nextLine());
+
+        System.out.println("Displaying the information for " + ContactManager.contactMap.get(viewContact).getFullName()[0]);
 
         for (Contact value : ContactManager.contactMap.values()) {
             String fullName[] = value.getFullName();
