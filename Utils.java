@@ -21,4 +21,8 @@ public class Utils {
         return Float.parseFloat(tempNumber);
     }
 
+    public  static boolean stringToBoolean(String tempBoolean) {
+        return Boolean.parseBoolean(tempBoolean);
+    }
+
 }

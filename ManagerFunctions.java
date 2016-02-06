@@ -36,7 +36,7 @@ public class ManagerFunctions {
                // deleteContact();
                 break;
             case 3:
-                //listContacts();
+                listContacts();
                 break;
             case 4:
                 //exitManager();
@@ -75,7 +75,7 @@ public class ManagerFunctions {
 
         //relationship
         System.out.println("If this is a personal contact, please enter true"); //clearly a better way to ask this, but this will due for now i think
-        boolean isPersonal = scanner.nextBoolean();
+        boolean isPersonal = Utils.stringToBoolean(scanner.nextLine());
 
         //assign all these vars!
         ContactManager.contactMap.put(fullName, new Contact(nameArray, streetAddress, state, city, phone, zip, isPersonal));
@@ -85,6 +85,16 @@ public class ManagerFunctions {
 
     }
 
+    public static void listContacts() {
+
+        for (Contact value : ContactManager.contactMap.values()) {
+            String fullName[] = value.getFullName();
+            System.out.println(fullName[0]);
+            System.out.println(fullName[1]);
+            System.out.println(value.getStreetAddress());
+
+        }
+    }
 
 
 
