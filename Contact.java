@@ -26,7 +26,7 @@ public class Contact {
     }
 
     /** Start Getters and Setters */
-    //full name
+    //full nam
     public String[] getFullName() { return fullName; }
     public void setFullName(String[] fullName) { this.fullName = fullName;  }
 
