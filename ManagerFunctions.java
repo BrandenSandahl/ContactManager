@@ -12,7 +12,7 @@ public class ManagerFunctions {
 
 
 
-    public static int showOptions() {
+    public static int ShowOptions() {
         System.out.println("Welcome to the worlds first computerized contact manager.");
         System.out.println("Please choose from the option below:");
         System.out.printf("%30s%n", "1. Create a new contact");
@@ -22,7 +22,7 @@ public class ManagerFunctions {
         return Utils.stringToInt(scanner.nextLine());
     }
 
-    public static void handleSelection(int selection) {
+    public static void HandleSelection(int selection) {
         //check user input
         while (selection < 1 && selection >= 4) {
             System.out.println("you have entered an invalid selection, try again.");
@@ -31,13 +31,14 @@ public class ManagerFunctions {
         //handle user selection
         switch (selection) {
             case 1:
-                createContact();
+                CreateContact();
                 break;
             case 2:
-               // deleteContact();
+                DisplayAllContacts("delete");
+               // DeleteContact();
                 break;
             case 3:
-                DisplayAllContacts();
+                DisplaySingleContact(DisplayAllContacts("view"));
                 break;
             case 4:
                 ExitManager();
@@ -49,7 +50,7 @@ public class ManagerFunctions {
 
     }
 
-    public static void createContact() {
+    public static void CreateContact() {
         System.out.printf("%n%n%n");
         //name
         System.out.println("Enter contact's first name:");
@@ -86,14 +87,12 @@ public class ManagerFunctions {
     public static int DisplayAllContacts(String style) {
 
         System.out.println("Please enter the number of the contact you wish to " + style + " :");
-        int i = 1;
         for (Map.Entry<Integer, Contact> entry : ContactManager.contactMap.entrySet()) {
             Integer key = entry.getKey();
             Contact value = entry.getValue();
             System.out.println(key + ". " + value.getFullName()[0] + " " + value.getFullName()[1]);
         }
-        int viewContact;
-        return viewContact = Utils.stringToInt(scanner.nextLine());
+        return Utils.stringToInt(scanner.nextLine());
     }
 
     public static void DisplaySingleContact(int viewContact) {
@@ -109,6 +108,11 @@ public class ManagerFunctions {
         } else {
             System.out.println("This contact is filed as: Other");
         }
+
+    }
+
+    public static void DeleteContact(int deleteContact) {
+
 
     }
 

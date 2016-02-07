@@ -10,8 +10,8 @@ public class ContactManager {
     public static void main (String[] args) {
 
         while (true) {
-            int userSelection = ManagerFunctions.showOptions();
-            ManagerFunctions.handleSelection(userSelection);
+            int userSelection = ManagerFunctions.ShowOptions();
+            ManagerFunctions.HandleSelection(userSelection);
         }
 
 
