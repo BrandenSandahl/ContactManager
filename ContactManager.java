@@ -7,7 +7,7 @@ public class ContactManager {
 
     public static HashMap<Integer, Contact> contactMap = new HashMap<>();
 
-    public static void main (String[] args) {
+    public static void main (String[] args) throws InterruptedException {
 
         while (true) {
             int userSelection = ManagerFunctions.ShowOptions();

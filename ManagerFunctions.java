@@ -22,7 +22,7 @@ public class ManagerFunctions {
         return Utils.stringToInt(scanner.nextLine());
     }
 
-    public static void HandleSelection(int selection) {
+    public static void HandleSelection(int selection) throws InterruptedException {
         //check user input
         while (selection < 1 && selection >= 4) {
             System.out.println("you have entered an invalid selection, try again.");
@@ -34,8 +34,7 @@ public class ManagerFunctions {
                 CreateContact();
                 break;
             case 2:
-                DisplayAllContacts("delete");
-               // DeleteContact();
+                DeleteContact(DisplayAllContacts("delete"));
                 break;
             case 3:
                 DisplaySingleContact(DisplayAllContacts("view"));
@@ -111,8 +110,11 @@ public class ManagerFunctions {
 
     }
 
-    public static void DeleteContact(int deleteContact) {
-
+    public static void DeleteContact(int deleteContact) throws InterruptedException {
+        System.out.println("Deleting contact: " + ContactManager.contactMap.get(deleteContact).getFullName()[0] + "...");
+        ContactManager.contactMap.remove(deleteContact);
+        Thread.sleep(1000);
+        System.out.println("Contact has been deleted!");
 
     }
 
