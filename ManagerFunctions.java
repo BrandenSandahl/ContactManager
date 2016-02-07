@@ -41,7 +41,7 @@ public class ManagerFunctions {
                 listContacts();
                 break;
             case 4:
-                //exitManager();
+                exitManager();
                 break;
             default:
                 System.out.println("something had gone wrong (debugging message");
@@ -57,9 +57,6 @@ public class ManagerFunctions {
         String firstName = scanner.nextLine();
         System.out.println("Enter Contact's last name:");
         String lastName = scanner.nextLine();
-        //Integer fullName = lastName + ", " + firstName;
-        //String fullName = firstName.concat("_");
-        //fullName = fullName.concat(lastName);
         String nameArray[] = {firstName, lastName};
 
         //address
@@ -101,15 +98,24 @@ public class ManagerFunctions {
 
         int viewContact = Utils.stringToInt(scanner.nextLine());
 
-        System.out.println("Displaying the information for " + ContactManager.contactMap.get(viewContact).getFullName()[0]);
-
-        for (Contact value : ContactManager.contactMap.values()) {
-            String fullName[] = value.getFullName();
-            System.out.println(fullName[0]);
-            System.out.println(fullName[1]);
-            System.out.println(value.getStreetAddress());
-
+        System.out.println("Displaying the information for " + ContactManager.contactMap.get(viewContact).getFullName()[0] + ":");
+        //display the name and phone
+        System.out.printf("%s %s %40s %n", ContactManager.contactMap.get(viewContact).getFullName()[0], ContactManager.contactMap.get(viewContact).getFullName()[1], ContactManager.contactMap.get(viewContact).getPhoneNumber());
+        //display address
+        System.out.printf("%s %s %s %d n%n", ContactManager.contactMap.get(viewContact).getStreetAddress(), ContactManager.contactMap.get(viewContact).getCity(), ContactManager.contactMap.get(viewContact).getState(), ContactManager.contactMap.get(viewContact).getZipCode());
+        //display relationship
+        if (ContactManager.contactMap.get(viewContact).isPersonal()) {
+            System.out.println("This contact is filed as a Personal Contact");
+        } else {
+            System.out.println("This contact is filed as: Other");
         }
+
+
+    }
+
+    public static void exitManager() {
+        System.out.println("Exiting");
+        System.exit(0);
     }
 
 
