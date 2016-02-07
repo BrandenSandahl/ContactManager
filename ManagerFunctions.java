@@ -1,4 +1,3 @@
-import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -77,8 +76,8 @@ public class ManagerFunctions {
         boolean isPersonal = Utils.stringToBoolean(scanner.nextLine());
 
         //assign all these vars!
-        int numberOfContacts = ContactManager.contactMap.size();
-        ContactManager.contactMap.put(numberOfContacts, new Contact(nameArray, streetAddress, state, city, phone, zip, isPersonal));
+       // int numberOfContacts = ContactManager.contactList.size(); this was from my hashmap
+        ContactManager.contactList.add(new Contact(nameArray, streetAddress, state, city, phone, zip, isPersonal));
 
 
     }
@@ -86,23 +85,23 @@ public class ManagerFunctions {
     public static int DisplayAllContacts(String style) {
 
         System.out.println("Please enter the number of the contact you wish to " + style + " :");
-        for (Map.Entry<Integer, Contact> entry : ContactManager.contactMap.entrySet()) {
-            Integer key = entry.getKey();
-            Contact value = entry.getValue();
-            System.out.println(key + ". " + value.getFullName()[0] + " " + value.getFullName()[1]);
+        for (int i = 0; i < ContactManager.contactList.size(); i++) {
+            System.out.println((i + 1) + ". " + ContactManager.contactList.get(i).getFullName()[0] + " " + ContactManager.contactList.get(i).getFullName()[1]);
         }
+
         return Utils.stringToInt(scanner.nextLine());
     }
 
     public static void DisplaySingleContact(int viewContact) {
+        viewContact--;
 
-        System.out.println("Displaying the information for " + ContactManager.contactMap.get(viewContact).getFullName()[0] + ":");
+        System.out.println("Displaying the information for " + ContactManager.contactList.get(viewContact).getFullName()[0] + ":");
         //display the name and phone
-        System.out.printf("%s %s %40s %n", ContactManager.contactMap.get(viewContact).getFullName()[0], ContactManager.contactMap.get(viewContact).getFullName()[1], ContactManager.contactMap.get(viewContact).getPhoneNumber());
+        System.out.printf("%s %s %40s %n", ContactManager.contactList.get(viewContact).getFullName()[0], ContactManager.contactList.get(viewContact).getFullName()[1], ContactManager.contactList.get(viewContact).getPhoneNumber());
         //display address
-        System.out.printf("%s %s %s %d n%n", ContactManager.contactMap.get(viewContact).getStreetAddress(), ContactManager.contactMap.get(viewContact).getCity(), ContactManager.contactMap.get(viewContact).getState(), ContactManager.contactMap.get(viewContact).getZipCode());
+        System.out.printf("%s %s %s %d n%n", ContactManager.contactList.get(viewContact).getStreetAddress(), ContactManager.contactList.get(viewContact).getCity(), ContactManager.contactList.get(viewContact).getState(), ContactManager.contactList.get(viewContact).getZipCode());
         //display relationship
-        if (ContactManager.contactMap.get(viewContact).isPersonal()) {
+        if (ContactManager.contactList.get(viewContact).isPersonal()) {
             System.out.println("This contact is filed as a Personal Contact");
         } else {
             System.out.println("This contact is filed as: Other");
@@ -111,8 +110,9 @@ public class ManagerFunctions {
     }
 
     public static void DeleteContact(int deleteContact) throws InterruptedException {
-        System.out.println("Deleting contact: " + ContactManager.contactMap.get(deleteContact).getFullName()[0] + "...");
-        ContactManager.contactMap.remove(deleteContact);
+        deleteContact--;
+        System.out.println("Deleting contact: " + ContactManager.contactList.get(deleteContact).getFullName()[0] + "...");
+        ContactManager.contactList.remove(deleteContact);
         Thread.sleep(1000);
         System.out.println("Contact has been deleted!");
 
