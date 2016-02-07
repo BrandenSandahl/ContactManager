@@ -1,6 +1,5 @@
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  * Created by branden on 2/6/16 at 12:54.
@@ -38,10 +37,10 @@ public class ManagerFunctions {
                // deleteContact();
                 break;
             case 3:
-                listContacts();
+                DisplayAllContacts();
                 break;
             case 4:
-                exitManager();
+                ExitManager();
                 break;
             default:
                 System.out.println("something had gone wrong (debugging message");
@@ -81,22 +80,23 @@ public class ManagerFunctions {
         int numberOfContacts = ContactManager.contactMap.size();
         ContactManager.contactMap.put(numberOfContacts, new Contact(nameArray, streetAddress, state, city, phone, zip, isPersonal));
 
-       // System.out.println(ContactManager.contactMap.get(fullName).getCity()); Debugging! Remove me later!
-
 
     }
 
-    public static void listContacts() {
+    public static int DisplayAllContacts(String style) {
 
-        System.out.println("Please enter the number of the contact you wish to view:");
+        System.out.println("Please enter the number of the contact you wish to " + style + " :");
         int i = 1;
         for (Map.Entry<Integer, Contact> entry : ContactManager.contactMap.entrySet()) {
             Integer key = entry.getKey();
             Contact value = entry.getValue();
             System.out.println(key + ". " + value.getFullName()[0] + " " + value.getFullName()[1]);
         }
+        int viewContact;
+        return viewContact = Utils.stringToInt(scanner.nextLine());
+    }
 
-        int viewContact = Utils.stringToInt(scanner.nextLine());
+    public static void DisplaySingleContact(int viewContact) {
 
         System.out.println("Displaying the information for " + ContactManager.contactMap.get(viewContact).getFullName()[0] + ":");
         //display the name and phone
@@ -110,10 +110,9 @@ public class ManagerFunctions {
             System.out.println("This contact is filed as: Other");
         }
 
-
     }
 
-    public static void exitManager() {
+    public static void ExitManager() {
         System.out.println("Exiting");
         System.exit(0);
     }
