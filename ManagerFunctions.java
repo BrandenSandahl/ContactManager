@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -14,9 +15,9 @@ public class ManagerFunctions {
     public static int ShowOptions() {
         System.out.println("Welcome to the worlds first computerized contact manager.");
         System.out.println("Please choose from the option below:");
-        System.out.printf("%30s%n", "1. Create a new contact");
+        System.out.printf("%30s%n", "1. Create a new contact");  //backslash t \t like that!!!
         System.out.printf("%26s%n", "2. Delete a contact");
-        System.out.printf("%27s%n", "3. List all contacts");
+        System.out.printf("%25s%n", "3. List a contacts");
         System.out.printf("%30s%n", "4. Exit Contact Manager");
         return Utils.stringToInt(scanner.nextLine());
     }
@@ -76,17 +77,18 @@ public class ManagerFunctions {
         boolean isPersonal = Utils.stringToBoolean(scanner.nextLine());
 
         //assign all these vars!
-       // int numberOfContacts = ContactManager.contactList.size(); this was from my hashmap
         ContactManager.contactList.add(new Contact(nameArray, streetAddress, state, city, phone, zip, isPersonal));
 
 
     }
 
+
     public static int DisplayAllContacts(String style) {
 
         System.out.println("Please enter the number of the contact you wish to " + style + " :");
         for (int i = 0; i < ContactManager.contactList.size(); i++) {
-            System.out.println((i + 1) + ". " + ContactManager.contactList.get(i).getFullName()[0] + " " + ContactManager.contactList.get(i).getFullName()[1]);
+            Contact currentContact = ContactManager.contactList.get(i);
+            System.out.println((i + 1) + ". " + currentContact.getFullName()[0] + " " + currentContact.getFullName()[1]);
         }
 
         return Utils.stringToInt(scanner.nextLine());
@@ -95,13 +97,14 @@ public class ManagerFunctions {
     public static void DisplaySingleContact(int viewContact) {
         viewContact--;
 
-        System.out.println("Displaying the information for " + ContactManager.contactList.get(viewContact).getFullName()[0] + ":");
+        Contact currentContact = ContactManager.contactList.get(viewContact);  //local var to hold the start of this big location
+        System.out.println("Displaying the information for " + currentContact.getFullName()[0] + ":");
         //display the name and phone
-        System.out.printf("%s %s %40s %n", ContactManager.contactList.get(viewContact).getFullName()[0], ContactManager.contactList.get(viewContact).getFullName()[1], ContactManager.contactList.get(viewContact).getPhoneNumber());
+        System.out.printf("%s %s %40s %n", currentContact.getFullName()[0], currentContact.getFullName()[1], currentContact.getPhoneNumber());
         //display address
-        System.out.printf("%s %s %s %d n%n", ContactManager.contactList.get(viewContact).getStreetAddress(), ContactManager.contactList.get(viewContact).getCity(), ContactManager.contactList.get(viewContact).getState(), ContactManager.contactList.get(viewContact).getZipCode());
+        System.out.printf("%s %s %s %d n%n", currentContact.getStreetAddress(), currentContact.getCity(), currentContact.getState(), currentContact.getZipCode());
         //display relationship
-        if (ContactManager.contactList.get(viewContact).isPersonal()) {
+        if (currentContact.isPersonal()) {
             System.out.println("This contact is filed as a Personal Contact");
         } else {
             System.out.println("This contact is filed as: Other");
